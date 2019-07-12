@@ -31,7 +31,7 @@ pipeline {
             steps {
                //sh label: '', script: 'curl -u admin:admin --upload-file dist.zip http://18.191.215.188:8080/manager/text/deploy?config=file:/var/lib/tomcat8/webapps/'
               // sh 'ssh http://18.191.215.188:8080/manager  ls'
-               withCredentials([file(credentialsId: ''arko489_tomcat'', variable: 'password')]) {
+               withCredentials([file(credentialsId: 'arko489_tomcat', variable: 'password')]) {
                   // sh 'ssh -i ${atlassian-tools} ubuntu@18.191.215.188 unzip "angularAnkush/dist.zip" && ls'
                   sh 'scp -i ${secret_key_for_tomcat} build.zip ubuntu@18.191.215.188:/var/lib/tomcat8/webapps/'
                   sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.191.215.188 "cd /var/lib/tomcat8/webapps/;mkdir arko489;unzip -o build.zip -d ./build;"'
