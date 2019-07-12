@@ -14,6 +14,12 @@ pipeline {
                 sh 'npm run test'
             }
         }
+         stage ('zipping'){
+            steps {
+                sh 'npm run build'
+                sh 'zip -r build.zip ./build'
+            }
+        }
        
        
        
