@@ -27,14 +27,7 @@ pipeline {
             }
         }
         }
-        stage ('Deploy') {
-            steps {
-               withCredentials([file(credentialsId: 'atlassian-tools', variable: 'secret_key_for_tomcat')]) {
-               sh 'scp -i ${secret_key_for_tomcat} build.zip ubuntu@18.191.215.188:/var/lib/tomcat8/webapps/'
-               sh 'ssh -i ${secret_key_for_tomcat} ubuntu@18.191.215.188 "cd /var/lib/tomcat8/webapps/;mkdir arko489;unzip -o build.zip -d ./build;"'
-               }
-            }
-        }
+      
         stage('Sonarqube analysis') {
         steps {
             sh 'npm install sonarqube-scanner --save-dev'
