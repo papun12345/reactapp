@@ -12,6 +12,7 @@ pipeline {
          stage('Test') {
             steps {
                 sh 'npm run test'
+                sh 'npm test -- --coverage'
             }
         }
          stage ('zipping'){
@@ -20,6 +21,20 @@ pipeline {
                 sh 'zip -r build.zip ./build'
             }
         }
+       
+      
+        stage('Sonarqube analysis') {
+               environment {
+                 scannerHome=tool 'sonar scanner'
+            }
+              steps{
+             sh 'npm test -- --coverage'
+
+           sh '${scannerHome}/bin/sonar-scanner -Dproject.settings=./sonar.properties'
+         
+              }
+          }
+
         stage ('Uploading artifact to nexus'){
          steps{
          withCredentials([usernamePassword(credentialsId: 'arko489_nexus', passwordVariable: 'pwd', usernameVariable: 'usr')]) {
@@ -27,14 +42,6 @@ pipeline {
             }
         }
         }
-      
-        stage('Sonarqube analysis') {
-        steps {
-            sh 'npm install sonarqube-scanner --save-dev'
-            sh 'npm run sonar'
-           }
-        }
-       
        
     }
 }
