@@ -35,6 +35,12 @@ pipeline {
                }
             }
         }
+        stage('Sonarqube analysis') {
+        steps {
+            sh 'npm install sonarqube-scanner --save-dev'
+            sh 'npm run sonar'
+           }
+        }
        
        
     }
