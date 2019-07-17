@@ -35,13 +35,13 @@ pipeline {
               }
           }
 
-        stage ('Uploading artifact to nexus'){
-         steps{
-         withCredentials([usernamePassword(credentialsId: 'arko489_nexus', passwordVariable: 'pwd', usernameVariable: 'usr')]) {
-         sh 'curl -v -u $usr:$pwd --upload-file build.zip http://3.14.251.87:8081/nexus/content/repositories/devopstraining/arko/build.zip'
-            }
-        }
-        }
+        //stage ('Uploading artifact to nexus'){
+        // steps{
+        // withCredentials([usernamePassword(credentialsId: 'arko489_nexus', passwordVariable: 'pwd', usernameVariable: 'usr')]) {
+         //sh 'curl -v -u $usr:$pwd --upload-file build.zip http://3.14.251.87:8081/nexus/content/repositories/devopstraining/arko/build.zip'
+         //   }
+      //  }
+       // }
        
     }
 }
