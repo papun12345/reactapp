@@ -31,11 +31,12 @@ pipeline {
                environment {
                  scannerHome=tool 'sonar scanner'
             }
-             
+            
+              steps {
               sh 'npm test -- --coverage'
               sh '${scannerHome}/bin/sonar-scanner -Dproject.settings=./sonar.properties'
                   }
-              
+        }
           
     
 
