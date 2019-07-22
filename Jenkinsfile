@@ -35,7 +35,7 @@ pipeline {
               sh 'npm test -- --coverage'
               sh '${scannerHome}/bin/sonar-scanner -Dproject.settings=./sonar.properties'
                   }
-              }
+              
           
     stage('Quality Gate') {
               steps{
