@@ -2,6 +2,9 @@ pipeline {
     agent any
     
     tools {nodejs "nodejs"}
+     tools {
+        maven 'mymaven' 
+    }
     
     stages {
         stage('Build') {
@@ -9,7 +12,9 @@ pipeline {
                 sh 'npm install'
             }
         }
-         stage('Test') {
+    }
+}
+       /*  stage('Test') {
             steps {
                 sh 'npm run test'
                 sh 'npm test -- --coverage'
@@ -51,5 +56,5 @@ pipeline {
       slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }
     }
-}
+}*/
 
