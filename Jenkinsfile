@@ -31,14 +31,12 @@ pipeline {
                environment {
                  scannerHome=tool 'sonar scanner'
             }
-              steps{
-                  withSonarQubeEnv('sonar_server')
-                  {
+             
               sh 'npm test -- --coverage'
               sh '${scannerHome}/bin/sonar-scanner -Dproject.settings=./sonar.properties'
                   }
               }
-          }
+          
     stage('Quality Gate') {
               steps{
                     timeout(time: 1,unit: 'HOURS')
