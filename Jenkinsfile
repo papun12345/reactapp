@@ -12,8 +12,8 @@ pipeline {
             }
         }
     }
-}
-       /*  stage('Test') {
+
+       stage('Test') {
             steps {
                 sh 'npm run test'
                 sh 'npm test -- --coverage'
@@ -38,6 +38,14 @@ pipeline {
          
               }
           }
+    stage('Quality Gate') {
+              steps{
+                    timeout(time: 1,unit: 'HOURS')
+                  {
+                      waitForQualityGate abortPipeline: true
+                  }
+              }
+          }
 
         stage ('Uploading artifact to nexus'){
         steps{
@@ -55,5 +63,5 @@ pipeline {
       slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
     }
     }
-}*/
+}
 
