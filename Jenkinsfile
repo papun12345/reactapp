@@ -32,10 +32,13 @@ pipeline {
                  scannerHome=tool 'sonar scanner'
             }
             
-              steps {
+              steps { 
+                   withSonarQubeEnv('Sonar') {
+                  
               sh 'npm test -- --coverage'
               sh '${scannerHome}/bin/sonar-scanner -Dproject.settings=./sonar.properties'
                   }
+              }
         }
        stage("Quality Gate") {
             steps {
