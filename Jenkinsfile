@@ -13,12 +13,12 @@ pipeline {
         }
     
 
-       stage('Test') {
+      /* stage('Test') {
             steps {
                 sh 'npm run test'
                 sh 'npm test -- --coverage'
             }
-        }
+        }*/
          stage ('zipping'){
             steps {
                 sh 'npm run build'
@@ -27,7 +27,7 @@ pipeline {
         }
        
       
-        stage('Sonarqube analysis') {
+        /*stage('Sonarqube analysis') {
                environment {
                  scannerHome=tool 'sonar scanner'
             }
@@ -46,13 +46,13 @@ pipeline {
                 waitForQualityGate abortPipeline: true
               }
             }
-       }
+       }*/
     
 
         stage ('Uploading artifact to nexus'){
         steps{
         withCredentials([usernamePassword(credentialsId: 'arko489_nexus', passwordVariable: 'pwd', usernameVariable: 'usr')]) {
-         sh 'curl -v -u $usr:$pwd --upload-file build.zip http://3.14.251.87:8081/nexus/content/repositories/devopstraining/arko/build.zip'
+         sh 'curl -v -u $usr:$pwd --upload-file build.zip http://3.17.164.37:8081/nexus/content/repositories/devopstraining/arko/build.zip'
             }
         }
        }
